@@ -26,11 +26,6 @@ public class ProductoService {
         return productoRepository.findById(id);
     }
 
-    //Guardar o actualizar producto
-    public Producto save(Producto producto) {
-        return productoRepository.save(producto);
-    }
-
     //Eliminar producto
     public void deleteById(Long id) {
         productoRepository.deleteById(id);

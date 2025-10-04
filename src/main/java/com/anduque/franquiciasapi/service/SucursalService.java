@@ -26,11 +26,6 @@ public class SucursalService {
         return sucursalRepository.findById(id);
     }
 
-    //Guardar o actualizar sucursal
-    public Sucursal save(Sucursal sucursal) {
-        return sucursalRepository.save(sucursal);
-    }
-
     //Eliminar sucursal
     public void deleteById(Long id) {
         sucursalRepository.deleteById(id);

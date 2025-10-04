@@ -1,5 +1,6 @@
 package com.anduque.franquiciasapi.service;
 
+import com.anduque.franquiciasapi.dto.FranquiciaRequestDTO;
 import com.anduque.franquiciasapi.model.Franquicia;
 import com.anduque.franquiciasapi.repository.FranquiciaRepository;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,6 @@ public class FranquiciaService {
     //Buscar franquicia por ID
     public Optional<Franquicia> findById(Long id) {
         return franquiciaRepository.findById(id);
-    }
-
-    //Guardar o actualizar franquicia
-    public Franquicia save(Franquicia franquicia) {
-        return franquiciaRepository.save(franquicia);
     }
 
     //Eliminar franquicia
