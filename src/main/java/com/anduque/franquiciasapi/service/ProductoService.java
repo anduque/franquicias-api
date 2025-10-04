@@ -2,6 +2,7 @@ package com.anduque.franquiciasapi.service;
 
 import com.anduque.franquiciasapi.dto.ApiResponse;
 import com.anduque.franquiciasapi.dto.ProductoRequestDTO;
+import com.anduque.franquiciasapi.dto.ProductoUpdateDTO;
 import com.anduque.franquiciasapi.dto.ProductoUpdateStockDTO;
 import com.anduque.franquiciasapi.model.Producto;
 import com.anduque.franquiciasapi.model.Sucursal;
@@ -63,5 +64,15 @@ public class ProductoService {
         Producto updatedProducto = productoRepository.save(producto);
 
         return new ApiResponse<>("Stock actualizado con éxito", null, updatedProducto);
+    }
+
+    //Actualizar el nombre del producto
+    public ApiResponse<Producto> updateNombreProductoById(Long id, ProductoUpdateDTO productoUpdateDTO) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        producto.setNombre(productoUpdateDTO.getNuevoNombre());
+        Producto updatedProducto = productoRepository.save(producto);
+
+        return new ApiResponse<>("Nombre del producto actualizado con éxito", null, updatedProducto);
     }
 }

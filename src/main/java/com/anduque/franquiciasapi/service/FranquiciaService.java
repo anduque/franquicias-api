@@ -2,6 +2,7 @@ package com.anduque.franquiciasapi.service;
 
 import com.anduque.franquiciasapi.dto.ApiResponse;
 import com.anduque.franquiciasapi.dto.FranquiciaRequestDTO;
+import com.anduque.franquiciasapi.dto.FranquiciaUpdateDTO;
 import com.anduque.franquiciasapi.dto.ProductoMayorStockDTO;
 import com.anduque.franquiciasapi.model.Franquicia;
 import com.anduque.franquiciasapi.model.Producto;
@@ -41,6 +42,7 @@ public class FranquiciaService {
         return franquiciaRepository.findById(id);
     }
 
+    //Buscar los productos con mayor stock por cada sucursal de una franquicia
     public List<ProductoMayorStockDTO> getMayorStock(Long id) {
         Franquicia franquicia = franquiciaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Franquicia no encontrada"));
@@ -67,5 +69,15 @@ public class FranquiciaService {
             }
         }
         return result;
+    }
+
+    //Actualizar nombre de franquicia
+    public ApiResponse<Franquicia> updateNombreFranquiciaById(Long id, FranquiciaUpdateDTO franquiciaUpdateDTO) {
+        Franquicia franquicia = franquiciaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Franquicia no encontrada"));
+        franquicia.setNombre(franquiciaUpdateDTO.getNuevoNombre());
+        Franquicia updateFranquicia = franquiciaRepository.save(franquicia);
+
+        return new ApiResponse<>("Franquicia actualizada", null, updateFranquicia);
     }
 }

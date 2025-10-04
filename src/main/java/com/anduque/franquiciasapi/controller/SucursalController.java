@@ -2,6 +2,7 @@ package com.anduque.franquiciasapi.controller;
 
 import com.anduque.franquiciasapi.dto.ApiResponse;
 import com.anduque.franquiciasapi.dto.SucursalRequestDTO;
+import com.anduque.franquiciasapi.dto.SucursalUpdateDTO;
 import com.anduque.franquiciasapi.model.Sucursal;
 import com.anduque.franquiciasapi.service.SucursalService;
 import jakarta.validation.Valid;
@@ -30,5 +31,11 @@ public class SucursalController {
     public ResponseEntity<ApiResponse<Sucursal>> createSucursal(@Valid @RequestBody SucursalRequestDTO sucursalRequestDTO){
         ApiResponse<Sucursal> sucursal = sucursalService.createSucursal(sucursalRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(sucursal);
+    }
+
+    @PatchMapping("{id}/nombre")
+    public ResponseEntity<ApiResponse<Sucursal>> updateNombreSucursal(@PathVariable Long id, @Valid @RequestBody SucursalUpdateDTO sucursalUpdateDTO){
+        ApiResponse<Sucursal> response = sucursalService.updateNombreSucursalById(id, sucursalUpdateDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

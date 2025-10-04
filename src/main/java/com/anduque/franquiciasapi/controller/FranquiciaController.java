@@ -1,8 +1,6 @@
 package com.anduque.franquiciasapi.controller;
 
-import com.anduque.franquiciasapi.dto.ApiResponse;
-import com.anduque.franquiciasapi.dto.FranquiciaRequestDTO;
-import com.anduque.franquiciasapi.dto.ProductoMayorStockDTO;
+import com.anduque.franquiciasapi.dto.*;
 import com.anduque.franquiciasapi.model.Franquicia;
 import com.anduque.franquiciasapi.service.FranquiciaService;
 import jakarta.validation.Valid;
@@ -37,5 +35,11 @@ public class FranquiciaController {
     public ResponseEntity<ApiResponse<List<ProductoMayorStockDTO>>> getMayorStock(@PathVariable("id") Long id) {
         List<ProductoMayorStockDTO> productoMayorStockDTOList = franquiciaService.getMayorStock(id);
         return ResponseEntity.ok(new ApiResponse<>("Productos con mayor stock por sucursal", null, productoMayorStockDTOList));
+    }
+
+    @PatchMapping("{id}/nombre")
+    public ResponseEntity<ApiResponse<Franquicia>> updateNombreFranquicia(@PathVariable("id") Long id, @Valid @RequestBody FranquiciaUpdateDTO franquiciaUpdateDTO) {
+        ApiResponse<Franquicia> response = franquiciaService.updateNombreFranquiciaById(id, franquiciaUpdateDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

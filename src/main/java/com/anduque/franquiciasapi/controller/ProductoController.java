@@ -2,10 +2,12 @@ package com.anduque.franquiciasapi.controller;
 
 import com.anduque.franquiciasapi.dto.ApiResponse;
 import com.anduque.franquiciasapi.dto.ProductoRequestDTO;
+import com.anduque.franquiciasapi.dto.ProductoUpdateDTO;
 import com.anduque.franquiciasapi.dto.ProductoUpdateStockDTO;
 import com.anduque.franquiciasapi.model.Producto;
 import com.anduque.franquiciasapi.service.ProductoService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,12 @@ public class ProductoController {
     @PatchMapping("{id}/stock")
     public ResponseEntity<ApiResponse<Producto>> updateStock(@PathVariable("id") Long id, @Valid @RequestBody ProductoUpdateStockDTO productoUpdateStockDTO){
         ApiResponse<Producto> response = productoService.updateProductoById(id, productoUpdateStockDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PatchMapping("{id}/nombre")
+    public ResponseEntity<ApiResponse<Producto>> updateNombreProducto(@PathVariable("id") Long id, @Valid @RequestBody ProductoUpdateDTO productoUpdateDTO){
+        ApiResponse<Producto> response = productoService.updateNombreProductoById(id, productoUpdateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

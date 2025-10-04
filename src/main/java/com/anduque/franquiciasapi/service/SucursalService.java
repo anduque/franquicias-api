@@ -2,6 +2,7 @@ package com.anduque.franquiciasapi.service;
 
 import com.anduque.franquiciasapi.dto.ApiResponse;
 import com.anduque.franquiciasapi.dto.SucursalRequestDTO;
+import com.anduque.franquiciasapi.dto.SucursalUpdateDTO;
 import com.anduque.franquiciasapi.model.Franquicia;
 import com.anduque.franquiciasapi.model.Sucursal;
 import com.anduque.franquiciasapi.repository.FranquiciaRepository;
@@ -44,8 +45,13 @@ public class SucursalService {
         return sucursalRepository.findById(id);
     }
 
-    //Eliminar sucursal
-    public void deleteById(Long id) {
-        sucursalRepository.deleteById(id);
+    //Actualizar nombre de sucursal
+    public ApiResponse<Sucursal> updateNombreSucursalById(Long id, SucursalUpdateDTO sucursalUpdateDTO) {
+        Sucursal sucursal = sucursalRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sucursal no encontrada"));
+        sucursal.setNombre(sucursalUpdateDTO.getNuevoNombre());
+        Sucursal updatedSucursal = sucursalRepository.save(sucursal);
+
+        return new ApiResponse<>("Nombre de la sucursal actualizada con éxito", null, updatedSucursal);
     }
 }
