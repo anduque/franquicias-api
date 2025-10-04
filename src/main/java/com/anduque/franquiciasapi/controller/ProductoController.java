@@ -7,7 +7,6 @@ import com.anduque.franquiciasapi.dto.ProductoUpdateStockDTO;
 import com.anduque.franquiciasapi.model.Producto;
 import com.anduque.franquiciasapi.service.ProductoService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
