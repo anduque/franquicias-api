@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST encargado de gestionar las operaciones relacionadas con las productos.
+ *
+ * Expone endpoints para crear, consultar, actualizar y eliminar productos.
+ * Algunos endpoints devuelven una respuesta estandarizada mediante {@link ApiResponse}.
+ */
 @RestController
 @RequestMapping("/producto")
 public class ProductoController {

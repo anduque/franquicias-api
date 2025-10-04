@@ -5,8 +5,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: AcdvR!92*mtZx#1
       MYSQL_DATABASE: franquicias_db
-      MYSQL_USER: accenture_dev
-      MYSQL_PASSWORD: Xy!9#Lm2025$AccD
     ports:
       - "3307:3306"
     volumes:

@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST encargado de gestionar las operaciones relacionadas con las sucursales.
+ *
+ * Expone endpoints para crear, consultar y actualizar sucursales.
+ * Algunos endpoints devuelven una respuesta estandarizada mediante {@link ApiResponse}.
+ */
 @RestController
 @RequestMapping("/sucursal")
 public class SucursalController {

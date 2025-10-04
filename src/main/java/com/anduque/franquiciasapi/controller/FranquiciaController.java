@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST encargado de gestionar las operaciones relacionadas con las franquicias.
+ *
+ * Expone endpoints para crear, consultar y actualizar franquicias.
+ * Algunos endpoints devuelven una respuesta estandarizada mediante {@link ApiResponse}.
+ */
 @RestController
 @RequestMapping("/franquicia")
 public class FranquiciaController {
