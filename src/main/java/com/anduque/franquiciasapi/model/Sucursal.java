@@ -1,17 +1,17 @@
 package com.anduque.franquiciasapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "sucursales")
 public class Sucursal {
 
     @Id
@@ -19,4 +19,11 @@ public class Sucursal {
     private Long id;
 
     private String nombre;
+
+    @ManyToOne
+    @JoinColumn(name = "franquicia_id")
+    private Franquicia franquicia;
+
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Franquicia> productos;
 }
