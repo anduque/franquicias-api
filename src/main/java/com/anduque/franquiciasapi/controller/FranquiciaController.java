@@ -1,10 +1,14 @@
 package com.anduque.franquiciasapi.controller;
 
+import com.anduque.franquiciasapi.dto.ApiResponse;
+import com.anduque.franquiciasapi.dto.FranquiciaRequestDTO;
+import com.anduque.franquiciasapi.dto.ProductoMayorStockDTO;
 import com.anduque.franquiciasapi.model.Franquicia;
 import com.anduque.franquiciasapi.service.FranquiciaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +25,17 @@ public class FranquiciaController {
     @GetMapping
     public List<Franquicia> getFranquicias() {
         return franquiciaService.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Franquicia>> createFranquicia(@Valid @RequestBody FranquiciaRequestDTO franquiciaRequestDTO) {
+        ApiResponse<Franquicia> franquicia = franquiciaService.createFranquicia(franquiciaRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(franquicia);
+    }
+
+    @GetMapping("{id}/productos-mayor-stock")
+    public ResponseEntity<ApiResponse<List<ProductoMayorStockDTO>>> getMayorStock(@PathVariable("id") Long id) {
+        List<ProductoMayorStockDTO> productoMayorStockDTOList = franquiciaService.getMayorStock(id);
+        return ResponseEntity.ok(new ApiResponse<>("Productos con mayor stock por sucursal", null, productoMayorStockDTOList));
     }
 }

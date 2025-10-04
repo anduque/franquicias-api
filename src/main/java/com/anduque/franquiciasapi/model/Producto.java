@@ -1,5 +1,6 @@
 package com.anduque.franquiciasapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +24,6 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "sucursal_id")
+    @JsonBackReference
     private Sucursal sucursal;
 }

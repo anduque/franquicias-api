@@ -1,10 +1,13 @@
 package com.anduque.franquiciasapi.controller;
 
+import com.anduque.franquiciasapi.dto.ApiResponse;
+import com.anduque.franquiciasapi.dto.SucursalRequestDTO;
 import com.anduque.franquiciasapi.model.Sucursal;
 import com.anduque.franquiciasapi.service.SucursalService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +24,11 @@ public class SucursalController {
     @GetMapping
     public List<Sucursal> getSucursales(){
         return sucursalService.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Sucursal>> createSucursal(@Valid @RequestBody SucursalRequestDTO sucursalRequestDTO){
+        ApiResponse<Sucursal> sucursal = sucursalService.createSucursal(sucursalRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(sucursal);
     }
 }
