@@ -44,6 +44,42 @@ docker-compose up --build
 2. La API estará disponible en: `http://localhost:8080`
 3. La base de datos MySQL estará expuesta en el puerto `3307` de tu máquina local.
 
+## Cómo ejecutar localmente sin Docker
+
+### Requisitos
+
+* Java 17+
+* Maven 3.8+
+* MySQL 8+ instalado localmente
+* Git
+
+### Configurar la base de datos
+
+1. Crea una base de datos local en MySQL.
+2. Configura `src/main/resources/application.properties` con tus credenciales locales, por ejemplo:
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/mi_db
+spring.datasource.username=usuario
+spring.datasource.password=contraseña
+```
+
+### Ejecutar con Maven
+
+```
+mvn clean install
+mvn spring-boot:run
+```
+
+* La API estará disponible en `http://localhost:8080`.
+
+### Ejecutar como JAR (opcional)
+
+```
+mvn clean package
+java -jar target/tu-app-0.0.1-SNAPSHOT.jar
+```
+
 ## Endpoints
 
 ### Franquicia
